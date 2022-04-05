@@ -29,8 +29,29 @@ router.post("/add", (req, res) => {
   if(!title) {
     error.push({ text: 'Please add a title'});
   }
+  if(!technologies) {
+    error.push({ text: 'Please add a some technologies'});
+  }
+  if(!description) {
+    error.push({ text: 'Please add a description'});
+  }
+  if(!contact_email) {
+    error.push({ text: 'Please add a contact email'});
+  }
 
-  //Insert into table
+  // Check for errors
+  if(errors.length > 0) {
+    res.render('add', {
+      errors,
+      title,
+      technologies,
+      budget,
+      description,
+      contact_email
+    });
+
+  } else {
+     //Insert into table
   Gig.create({
     title,
     technologies,
@@ -40,6 +61,7 @@ router.post("/add", (req, res) => {
   })
     .then((gig) => res.redirect("/gigs"))
     .catch((err) => console.log(err));
+  }
 });
 
 module.exports = router;
