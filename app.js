@@ -11,7 +11,10 @@ db.authenticate().then(() => console.log("Database connected..."));
 
 const app = express();
 
-app.get("/", (req, res) => res.send("INDEX"));
+// Index route
+app.get("/", (req, res) => res.send("index", { layout: 'landing'}));
+
+// Gig routes
 app.use("/gigs", require("./routes/gigs"));
 
 const PORT = process.env.PORT || 5000;
