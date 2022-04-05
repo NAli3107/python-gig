@@ -7,18 +7,22 @@ const router = express.Router();
 const db = require("../config/database");
 const Gig = require("../models/Gig");
 
-//Get gi list
-router.get("/", (req, res) =>
-  Gig.findAll()
-    .then((gigs) => {
-      console.log(gigs);
-      res.sendStatus(200);
-    })
-    .catch((err) => console.log(err))
-);
+
+// Get gig list
+router.get('/', (req, res) =>
+ Gig.findAll()
+ .then(gigs => {
+  res.render('gigs', {
+    gigs
+  });
+})
+ .catch(err => console.log(err)));
+
+ // Display add gig form
+ router.get('/add', (req, res) => res.render('add'));
 
 // Add a gig
-router.get("/add", (req, res) => {
+router.post("/add", (req, res) => {
   const data = {
     title: "React developer",
     technologies: "react, javascript, html, css",
@@ -29,6 +33,7 @@ router.get("/add", (req, res) => {
   };
 
   let { title, technologies, budget, description, contact_email } = data;
+
 
   //Insert into table
   Gig.create({
