@@ -2,10 +2,11 @@
 //Gig routes
 //app.use("/gigs", require("./routes/gigs"));
 
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const db = require('../config/database');
-const Gig = require('../models/Gig');
+const db = require("../config/database");
+const Gig = require("../models/Gig");
+
 
 // Get gig list
 router.get('/', (req, res) =>
@@ -33,8 +34,9 @@ router.post("/add", (req, res) => {
 
   let { title, technologies, budget, description, contact_email } = data;
 
-  // Insert into table
-   Gig.create({
+
+  //Insert into table
+  Gig.create({
     title,
     technologies,
     description,
@@ -46,4 +48,3 @@ router.post("/add", (req, res) => {
 });
 
 module.exports = router;
-
