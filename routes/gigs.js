@@ -23,17 +23,12 @@ router.get('/', (req, res) =>
 
 // Add a gig
 router.post("/add", (req, res) => {
-  const data = {
-    title: "React developer",
-    technologies: "react, javascript, html, css",
-    budget: "£3000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non gravida velit. Vivamus non tortor imperdiet, ultrices libero sed, vulputate urna. Aliquam commodo porta mauris interdum condimentum. Cras maximus volutpat mi, eu maximus sapien egestas aliquet.",
-    contact_email: "user1@gmail.com",
-  };
+  let { title, technologies, budget, description, contact_email } = req.body;
+  let errors =[];
 
-  let { title, technologies, budget, description, contact_email } = data;
-
+  if(!title) {
+    error.push({ text: 'Please add a title'});
+  }
 
   //Insert into table
   Gig.create({
