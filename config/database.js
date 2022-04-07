@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 
-module.exports = new Sequelize("gig_db", "root", "password", {
-  host: "localhost",
+module.exports = new Sequelize("gig_db", "root", "secretpassword", {
+  host: "127.0.0.1",
   dialect: "mysql",
   operatorsAliases: '0',
 
