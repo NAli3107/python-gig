@@ -23,19 +23,44 @@ router.get('/', (req, res) =>
 
 // Add a gig
 router.post("/add", (req, res) => {
-  const data = {
-    title: "React developer",
-    technologies: "react, javascript, html, css",
-    budget: "£3000",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer non gravida velit. Vivamus non tortor imperdiet, ultrices libero sed, vulputate urna. Aliquam commodo porta mauris interdum condimentum. Cras maximus volutpat mi, eu maximus sapien egestas aliquet.",
-    contact_email: "user1@gmail.com",
-  };
+  let { title, technologies, budget, description, contact_email } = req.body;
+  let errors =[];
 
-  let { title, technologies, budget, description, contact_email } = data;
+  if(!title) {
+    error.push({ text: 'Please add a title'});
+  }
+  if(!technologies) {
+    error.push({ text: 'Please add a some technologies'});
+  }
+  if(!description) {
+    error.push({ text: 'Please add a description'});
+  }
+  if(!contact_email) {
+    error.push({ text: 'Please add a contact email'});
+  }
 
+  // Check for errors
+  if(errors.length > 0) {
+    res.render('add', {
+      errors,
+      title,
+      technologies,
+      budget,
+      description,
+      contact_email
+    });
 
-  //Insert into table
+  } else {
+    if(!budget) {
+      budget = 'Unknown';
+    } else {
+      budget = `£${budget}`;
+    }}
+
+    // Make lowercase and remove space after comma
+    technologies = technologies.toLowerCase().replace(/, /g, ',');
+
+     //Insert into table
   Gig.create({
     title,
     technologies,
@@ -45,7 +70,8 @@ router.post("/add", (req, res) => {
   })
     .then((gig) => res.redirect("/gigs"))
     .catch((err) => console.log(err));
-});
+  }
+);
 
 //Search for gigs
 router.get('/search', (req, res) => {

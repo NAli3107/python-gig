@@ -3,7 +3,7 @@ const Sequelize = require("sequelize");
 module.exports = new Sequelize("gig_db", "root", "password", {
   host: "localhost",
   dialect: "mysql",
-  operatorsAliases: false,
+  operatorsAliases: '0',
 
   pool: {
     max: 5,
