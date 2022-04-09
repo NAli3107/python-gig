@@ -1,6 +1,6 @@
 <section id="gigs" class="container">
     <h1>All Gigs</h1>
-
+  {{#if gigs.length}}
     {{#each gigs}}
     <div class="gig">
       <h3>{{title}}</h3>
@@ -10,13 +10,14 @@
         <li><a href="mailto:{{contact_email}}" class="btn btn-reverse">Apply Now</a></li>
       </ul>
       <div class="tech">
-        <small>Technologies Needed: <span>{{Technologies}}</span></small>
+        <small>Technologies Needed: <span>{{technologies}}</span></small>
       </div>
     </div>
-    {{else}}
-    <p>No gigs available</p>
     {{/each}}
 
+    {{else}}
+    <p>No gigs available</p>
+    {{/if}}
     
 
     

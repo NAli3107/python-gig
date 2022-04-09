@@ -7,7 +7,7 @@
         <p>{{text}}</p>
       </div>
       {{/each}}
-      <form action="/gigs/add" method="POST">
+      <form class="addGigs">
         <div class="input-group">
           <label for="title">Gig Title</label>
           <input type="text" name="title" id="title" class="input-box" placeholder="eg. Small Wordpress website, React developer"
@@ -29,7 +29,7 @@
         </div>
         <div class="input-group">
           <label for="budget">Contact Email</label>
-          <input type="email" name="contact_email" id="contactemail" class="input-box" placeholder="Enter an email" value={{contact_email}}>
+          <input type="email" name="contact_email" id="contactEmail" class="input-box" placeholder="Enter an email" value={{contact_email}}>
         </div>
         <input type="submit" value="Add Gig" class="btn btn-reverse">
       </form>
