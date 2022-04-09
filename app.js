@@ -2,6 +2,7 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
 const path = require("path");
+const routes = require('./controllers')
 
 //Database
 const db = require("./config/database");
@@ -16,7 +17,8 @@ const app = express();
 app.get("/", (req, res) => res.render("index", { layout: "landing" }));
 
 // Gig routes
-app.use("/gigs", require("./routes/gigs"));
+// app.use("/gigs", require("./controllers/api/gigs"));
+app.use(routes);
 
 const PORT = process.env.PORT || 5000;
 
@@ -31,6 +33,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 app.get("/", (req, res) => res.send("INDEX"));
 
-db.sync({ force: true }).then(() => {
+db.sync({ force: false }).then(() => {
   app.listen(PORT, console.log(`Server Started on port ${PORT}`));
 });
