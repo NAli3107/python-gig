@@ -2,7 +2,7 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
 const path = require("path");
-// const routes = require('./controllers')
+// const routes = require("./controllers");
 
 //Database
 const db = require("./config/database");
@@ -17,7 +17,7 @@ const app = express();
 app.get("/", (req, res) => res.render("index", { layout: "landing" }));
 
 // Gig routes
-app.use("/gigs", require("./controllers/api/gigs"));
+
 // app.use(routes);
 
 const PORT = process.env.PORT || 5000;
@@ -27,10 +27,12 @@ app.engine("handlebars", exphbs.engine({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 // Body Parser
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 // Set static folder
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/gigs", require("./controllers/api/gigs"));
 app.get("/", (req, res) => res.send("INDEX"));
 
 db.sync({ force: false }).then(() => {

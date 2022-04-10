@@ -3,7 +3,7 @@ const res = require("express/lib/response");
 const router = express.Router();
 const db = require("../../config/database");
 const Gig = require("../../models/Gig");
-const Sequelize = require('sequelize');
+const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
 // Get gig list
@@ -57,8 +57,8 @@ router.post("/add", (req, res) => {
   }
 
   // Make lowercase and remove space after comma
-  technologies = technologies.toLowerCase().replace(/, /g, ",");
-  console.log(req.body, 'post route hit')
+  // technologies = technologies.toLowerCase().replace(/, /g, ",");
+
   //Insert into table
   Gig.create({
     title: req.body.title,
@@ -73,14 +73,14 @@ router.post("/add", (req, res) => {
 
 // Search for gigs
 
-router.get('/search', (req, res) => {
+router.get("/search", (req, res) => {
   let { term } = req.query;
 
   term = term.toLowerCase();
-  
-  Gig.findAll({where: {technologies: {[Op.like]: '%' + term + '%'}}})
-    .then(gigs => res.render('gigs', { gigs }))
-    .catch(err => console.log(err));
+
+  Gig.findAll({ where: { technologies: { [Op.like]: "%" + term + "%" } } })
+    .then((gigs) => res.render("gigs", { gigs }))
+    .catch((err) => console.log(err));
 });
 
 module.exports = router;
