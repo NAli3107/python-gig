@@ -2,7 +2,7 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
 const path = require("path");
-const routes = require('./controllers')
+// const routes = require('./controllers')
 
 //Database
 const db = require("./config/database");
@@ -17,8 +17,8 @@ const app = express();
 app.get("/", (req, res) => res.render("index", { layout: "landing" }));
 
 // Gig routes
-// app.use("/gigs", require("./controllers/api/gigs"));
-app.use(routes);
+app.use("/gigs", require("./controllers/api/gigs"));
+// app.use(routes);
 
 const PORT = process.env.PORT || 5000;
 
