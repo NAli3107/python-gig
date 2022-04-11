@@ -5,17 +5,17 @@ const newFormHandler = async (event) => {
   const technologies = document.querySelector("#technologies").value.trim();
   const description = document.querySelector("#description").value.trim();
   const budget = document.querySelector("#budget").value.trim();
-  const contactEmail = document.querySelector("#contactEmail").value.trim();
+  const contact_email = document.querySelector("#contactEmail").value.trim();
 
   if (title && technologies && description && budget && contactEmail) {
-    const response = await fetch(`/add`, {
+    const response = await fetch(`/gigs/add`, {
       method: "POST",
       body: JSON.stringify({
         title,
         technologies,
         description,
         budget,
-        contactEmail,
+        contact_email,
       }),
       headers: {
         "Content-Type": "application/json",
