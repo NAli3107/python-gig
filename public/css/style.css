@@ -100,16 +100,18 @@ header.inner {
   background: var(--primary-hover-color);
   border: 1px solid var(--primary-hover-color);
 }
-
-/* Home Search */
-.search-wrap {
-  /* background: url(../img/showcase.jpg) no-repeat center center fixed / cover; */
+body {
   background: url(../img/gigsPython.jpg) no-repeat center center fixed; 
-  -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 100vh;
+  -webkit-background-size: cover;
+  min-height: 100vh;
+}
+/* Home Search */
+.search-wrap {
+  
+ margin-top: 8cm;
   width: 100%;
   padding: 1.3rem 3rem;
   display: flex;
