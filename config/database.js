@@ -1,14 +1,20 @@
 const Sequelize = require("sequelize");
 
-module.exports = new Sequelize("gig_db", "root", "password", {
-  host: "localhost",
-  dialect: "mysql",
-  operatorsAliases: '0',
+let sequelize;
 
-  pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000,
-  },
-});
+if (process.env.JAWSDB_URL) {
+  sequelize = new Sequelize(process.env.JAWSDB_URL);
+} else {
+  sequelize = new Sequelize(
+    process.env.gig_db,
+    process.env.root,
+    process.env.password,
+    {
+      host: "localhost",
+      dialect: "mysql",
+      port: 3306,
+    }
+  );
+}
+
+module.exports = sequelize;
