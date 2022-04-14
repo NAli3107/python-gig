@@ -17,7 +17,9 @@ const loginFormHandler = async (event) => {
       // If successful, redirect the browser to the landing page
       document.location.replace("/");
     } else {
-      alert(response.statusText);
+      document.getElementById("login-email").innerHTML =
+        "Credentials dont exist, signup instead";
+      // alert(response.statusText);
     }
   }
 };

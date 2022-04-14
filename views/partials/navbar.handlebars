@@ -1,0 +1,24 @@
+<nav>
+      <ul>
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/allGigs">All Gigs</a>
+        </li>
+        {{#if logged_in}}
+        <li>
+          <a href="/addGigs">Add Gig</a>
+        </li>
+        {{/if}}
+        {{#if logged_in}}
+        <li>
+          <a id="logout" href="#">Logout</a>
+        </li>
+        {{else}}
+         <li>
+          <a href="/login">Login</a>
+        </li>
+        {{/if}}
+      </ul>
+    </nav>

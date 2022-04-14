@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { Gig, User } = require('../models');
-const withAuth = require('../utils/auth');
+const { Gig, User } = require("../models");
+const withAuth = require("../utils/auth");
 const Sequelize = require("sequelize");
 var exphbs = require("express-handlebars");
 const Op = Sequelize.Op;
@@ -10,14 +10,14 @@ const Op = Sequelize.Op;
 //   res.render("index");
 // });
 
-router.get('/', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     // Get all gigs and JOIN with user data
     const gigsData = await Gig.findAll({
       include: [
         {
           model: User,
-          attributes: ['name'],
+          attributes: ["name"],
         },
       ],
     });
@@ -26,15 +26,14 @@ router.get('/', async (req, res) => {
     const gigs = gigsData.map((gig) => gig.get({ plain: true }));
 
     // Pass serialized data and session flag into template
-    res.render('index', { 
-      gigs, 
-      logged_in: req.session.logged_in 
+    res.render("index", {
+      gigs,
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
-
 
 // Get gig list
 router.get("/allGigs", (req, res) => {
@@ -42,6 +41,7 @@ router.get("/allGigs", (req, res) => {
     .then((gigs) =>
       res.render("gigs", {
         gigs,
+        logged_in: req.session.logged_in,
       })
     )
     .catch((err) => console.log(err));
@@ -53,7 +53,9 @@ router.get("/addGigs", (req, res) => {
   //   res.redirect('/login');
   //   return;
   // }
-  res.render("add");
+  res.render("add", {
+    logged_in: req.session.logged_in,
+  });
 });
 
 // Search for gigs
@@ -69,14 +71,14 @@ router.get("/search", (req, res) => {
 });
 
 // Login route
-router.get('/login', (req, res) => {
+router.get("/login", (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
-    res.redirect('/');
+    res.redirect("/");
     return;
   }
 
-  res.render('login');
+  res.render("login");
 });
 
 module.exports = router;
