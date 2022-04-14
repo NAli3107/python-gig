@@ -26,11 +26,20 @@
           <a href="/allGigs">All Gigs</a>
         </li>
         <li>
-          <a href="/addGigs">Add Gig</a>
-        </li>
-        <li>
           <a href="/login">Login</a>
         </li>
+        {{!-- <li>
+          <a href="/addGigs">Add Gig</a>
+        </li> --}}
+
+        <!-- Conditionally render login or logout links -->
+        {{#if logged_in}}
+        {{else}}
+          <a href="/addGigs">Add Gig</a>
+          <li>
+          <button class="no-button" id="logout">Logout</button>
+        </li>
+        {{/if}}   
       </ul>
     </nav>
   </header>
@@ -38,7 +47,6 @@
   <div class="container">
     {{{body}}}
     </div>
-    <script src="/js/add-gigs.js"></script>
 </body>
 
 </html>
