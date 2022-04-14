@@ -1,19 +1,32 @@
+const path = require("path");
 const express = require("express");
+const session = require("express-session");
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser");
-const path = require("path");
 const routes = require("./controllers");
 const Handlebars = require("handlebars");
 const {
   allowInsecurePrototypeAccess,
 } = require("@handlebars/allow-prototype-access");
-//Database
 
-const db = require("./config/database");
-// const { Sequelize } = require("sequelize/types");
+//Database
+const sequelize = require("./config/database");
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+const sess = {
+  secret: 'Super secret secret',
+  cookie: {},
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize
+  })
+};
+
+app.use(session(sess));
 
 //Handlebars (non Handlebars bug requires InsecurePrototypeAccess to work)
 app.engine(
@@ -25,6 +38,7 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
+
 // Body Parser
 app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
@@ -35,9 +49,6 @@ app.use(express.static(path.join(__dirname, "public")));
 // Gig routes
 app.use(routes);
 
-//test DB
-// db.authenticate().then(() => console.log("Database connected..."));
-
-db.sync({ force: false }).then(() => {
+sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, console.log(`Server Started on port ${PORT}`));
 });
