@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const Gig = require("../models/Gig");
+const {Gig, User} = require('../models')
+
 const Sequelize = require("sequelize");
 var exphbs = require("express-handlebars");
+const isAuthenticated = require("../config/middleware/isAuthenticated");
 const Op = Sequelize.Op;
 
 router.get("/", (req, res) => {
@@ -10,7 +12,7 @@ router.get("/", (req, res) => {
 });
 
 // Get gig list
-router.get("/allGigs", (req, res) => {
+router.get("/allGigs", isAuthenticated, (req, res) => {
   Gig.findAll()
     .then((gigs) =>
       res.render("gigs", {
@@ -21,7 +23,7 @@ router.get("/allGigs", (req, res) => {
 });
 
 // Display add gig form
-router.get("/addGigs", (req, res) => {
+router.get("/addGigs", isAuthenticated, (req, res) => {
   res.render("add");
 });
 
@@ -36,5 +38,19 @@ router.get("/search", (req, res) => {
     .then((gigs) => res.render("search", { gigs }))
     .catch((err) => console.log(err));
 });
+
+//render login page
+router.get('/login', (req, res) => {
+  // If the user is already logged in, redirect the request to another route
+  if (req.session.logged_in) {
+    res.redirect('/');
+    return;
+  }
+
+  res.render('login');
+});
+
+//render sing-up page
+
 
 module.exports = router;

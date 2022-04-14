@@ -18,6 +18,8 @@
     <h2><a href="/"><i class="fas fa-code"></i>
         GigsPython</a></h2>
     <nav>
+      <!-- Conditionally render login or logout links -->
+        {{#if logged_in}}
       <ul>
         <li>
           <a href="/">Home</a>
@@ -28,6 +30,10 @@
         <li>
           <a href="/gigs/add">Add Gig</a>
         </li>
+        <button class="no-button" id="logout">Logout</button>
+        {{else}}
+          <a href="/login">login</a>
+        {{/if}}
       </ul>
     </nav>
   </header>
