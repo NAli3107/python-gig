@@ -2,7 +2,7 @@
     <div class="form-wrap">
       <h1>Add A Gig</h1>
       <p>Your contact email will be shared with registered users to apply to your gig</p>
-      {{#each errors}}
+      {{#each errors as |error|}}
       <div class="error">
         <p>{{text}}</p>
       </div>

@@ -17,30 +17,7 @@
   <header class="inner">
     <h2><a href="/"><i class="fas fa-code"></i>
         GigsPython</a></h2>
-    <nav>
-      <ul>
-        <li>
-          <a href="/">Home</a>
-        </li>
-        <li>
-          <a href="/allGigs">All Gigs</a>
-        </li>
-        {{#if logged_in}}
-        <li>
-          <a href="/addGigs">Add Gig</a>
-        </li>
-        {{/if}}
-        {{#if logged_in}}
-        <li>
-          <a id="logout" href="#">Logout</a>
-        </li>
-        {{else}}
-         <li>
-          <a href="/login">Login</a>
-        </li>
-        {{/if}}
-      </ul>
-    </nav>
+    {{> navbar}}
   </header>
 
   <div class="container">
