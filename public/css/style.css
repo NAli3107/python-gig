@@ -9,6 +9,7 @@
 
 * {
   box-sizing: border-box;
+  
 }
 
 body {
@@ -37,6 +38,7 @@ a:hover {
   padding: 1rem 4rem;
   margin: auto;
   overflow: hidden;
+  
 }
 
 .error {
@@ -79,11 +81,13 @@ header.inner {
 
 /* Buttons */
 .btn {
-  color: #fff;
+  color: rgb(63, 53, 53);
   padding: 0.6rem;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(71, 61, 61);
   transition: all 0.7s;
 }
+
+
 
 .btn:hover {
   background: var(--primary-color);
